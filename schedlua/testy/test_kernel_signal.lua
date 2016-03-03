@@ -35,7 +35,7 @@ local function yieldCounter(name, nCount)
 		local eventName = name..tostring(num);
 		signalOne(eventName)
 		if num > (cutoff) then
-			--print("eventName: ", eventName)
+			print("eventName: ", eventName)
 			signalOne(eventName)
 			yield();
 		end
