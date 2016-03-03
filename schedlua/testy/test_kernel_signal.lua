@@ -65,9 +65,9 @@ local function main()
 --	counter15
 	-- test signalAll().  All three of these should trigger when
 	-- counter finishes
-	local t13 = onSignal(Functor(onCountFinished, "counter-1"), "counter-finished")
-	local t14 = onSignal(Functor(onCountFinished, "counter-2"), "counter-finished")
-	local t15 = onSignal(Functor(onCountFinished, "counter-3"), "counter-finished")
+	local t13 = onSignal(Functor(onCountFinished, "yieldCounter-1"), "counter-finished")
+	local t14 = onSignal(Functor(onCountFinished, "yieldCounter-2"), "counter-finished")
+	local t15 = onSignal(Functor(onCountFinished, "yieldCounter-3"), "counter-finished")
 --
 end
 
