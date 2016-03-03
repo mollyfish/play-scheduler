@@ -56,7 +56,7 @@ end
 
 function waitCutoff()
 	local signalName = "yieldCounter"
-	signalName = "yieldCounter" .. cutoff
+	signalName = "yieldCounter" .. (cutoff + 10)
 	print(signalName); 
 	print("LAMDA"); 
 	waitForSignal("yieldCounter", cutoff) 
