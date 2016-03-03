@@ -39,6 +39,7 @@ local function yieldCount(name)
 		end
 		return idx;
 	end
+	return closure;
 	--yield();
 end
 
