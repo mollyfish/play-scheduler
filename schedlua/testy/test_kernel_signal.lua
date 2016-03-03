@@ -8,6 +8,7 @@ local function numbers(ending)
 	local idx = 0;
 	local function closure()
 		idx = idx + 1;
+		print("idx:  ", idx)
 		if idx > ending then
 			return nil;
 		end
@@ -30,7 +31,7 @@ end
 
 local function counter(name, nCount)
 	for num in numbers(nCount) do
-		print("idx:  ", idx, "num:  ", num)
+		print("num:  ", num)
 		--local eventName = name..tostring(num);
 		local eventName = name..tostring(num);
 		--print(eventName)
