@@ -31,11 +31,11 @@ end
 
 local function yieldCounter(name, nCount)
 	for num in numbers(nCount) do
-		print("num:  ", num)
+		print(num)
 		local eventName = name..tostring(num);
 		signalOne(eventName)
 		if num > (cutoff) then
-			print("eventName: ", eventName)
+			--print("eventName: ", eventName)
 			signalOne(eventName)
 			yield();
 		end
@@ -57,7 +57,7 @@ end
 function waitCutoff()
 	local signalName = "yieldCounter"
 	signalName = "yieldCounter" .. (cutoff + 10)
-	print(signalName); 
+	--print(signalName); 
 	print("LAMDA"); 
 	waitForSignal(signalName) 
 	print("ALERT: reached ", (cutoff + 10)) 
