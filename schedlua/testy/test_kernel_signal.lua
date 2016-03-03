@@ -59,7 +59,7 @@ end
 
 local function main()
 	local t1 = spawn(yieldCounter, "yieldCounter", 50)
-	local t2 = spawn(waitingOnCount, "waitingCounter", 20)
+	local t2 = spawn(waitingOnCount, "waitingCounter", 40)
 	local t3 = spawn(wait15)
 
 --	counter15
