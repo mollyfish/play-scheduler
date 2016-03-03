@@ -60,7 +60,7 @@ function waitCutoff()
 	print(signalName); 
 	print("LAMDA"); 
 	waitForSignal(signalName) 
-	print("ALERT: reached ", cutoff) 
+	print("ALERT: reached ", (cutoff + 10)) 
 end
 
 local function main()
