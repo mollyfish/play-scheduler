@@ -33,7 +33,7 @@ local function yieldCounter(name, nCount)
 		print("num:  ", num)
 		local eventName = name..tostring(num);
 		signalOne(eventName)
-		if num < (nCount/2) then
+		if num > (nCount/2) then
 			yield();
 		end
 		signalAll(name..'-finished')
@@ -42,15 +42,12 @@ local function yieldCounter(name, nCount)
 end
 
 local function counter(name, nCount)
-	
-
 	for num in numbers(nCount) do
 		print("num:  ", num)
 		local eventName = name..tostring(num);
 		signalOne(eventName)
 		yield();
 	end
-
 	signalAll(name..'-finished')
 end
 
