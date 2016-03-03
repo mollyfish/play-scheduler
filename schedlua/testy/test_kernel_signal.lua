@@ -36,8 +36,8 @@ local function yieldCounter(name, nCount)
 			if num > (nCount/2 - 2) then
 				yield();
 			end
-		signalAll(name..'-finished')
 	end
+	signalAll(name..'-finished')
 
 end
 
