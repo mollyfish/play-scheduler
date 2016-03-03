@@ -30,7 +30,7 @@ end
 
 local function counter(name, nCount)
 	for num in numbers(nCount) do
-		print("idx:  ", nCount, "num:  ", num)
+		print("idx:  ", idx, "num:  ", num)
 		--local eventName = name..tostring(num);
 		local eventName = name..tostring(num);
 		--print(eventName)
