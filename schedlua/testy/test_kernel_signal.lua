@@ -28,7 +28,7 @@ local function onCountFinished(name)
 	print("Counter Finished: ", name)
 end
 
-local function counter(name, nCount)
+local function yieldCounter(name, nCount)
 	for num in numbers(nCount) do
 		print("num:  ", num)
 		local eventName = name..tostring(num);
@@ -53,21 +53,21 @@ end
 
 function wait15() 
 	print("LAMDA"); 
-	waitForSignal("counter15") 
+	waitForSignal("waitingCounter15") 
 	print("reached 15!!") 
 end
 
 local function main()
-	local t1 = spawn(yieldCounter, "counter", 50)
-	local t2 = spawn(waitingOnCount, "counter", 40)
+	local t1 = spawn(yieldCounter, "yieldCounter", 50)
+	local t2 = spawn(waitingOnCount, "waitingCounter", 20)
 	local t3 = spawn(wait15)
 
 --	counter15
 	-- test signalAll().  All three of these should trigger when
 	-- counter finishes
-	local t13 = onSignal(Functor(onCountFinished, "counter-1"), "counter-finished")
-	local t14 = onSignal(Functor(onCountFinished, "counter-2"), "counter-finished")
-	local t15 = onSignal(Functor(onCountFinished, "counter-3"), "counter-finished")
+	local t13 = onSignal(Functor(onCountFinished, "yieldCounter-1"), "yieldCounter-finished")
+	local t14 = onSignal(Functor(onCountFinished, "yieldCounter-2"), "yieldCounter-finished")
+	local t15 = onSignal(Functor(onCountFinished, "yieldCounter-3"), "yieldCounter-finished")
 --
 end
 
