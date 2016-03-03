@@ -33,33 +33,33 @@ local function yieldCounter(name, nCount)
 		print("num:  ", num)
 		local eventName = name..tostring(num);
 		signalOne(eventName)
-		if num > (nCount/2 - 2) then
-			yield();
-		end
+			if num > (nCount/2 - 2) then
+				yield();
+			end
 		signalAll(name..'-finished')
 	end
 
 end
 
-local function counter(name, nCount)
-	for num in numbers(nCount) do
-		print("num:  ", num)
-		local eventName = name..tostring(num);
-		signalOne(eventName)
-		yield();
-	end
-	signalAll(name..'-finished')
-end
+-- local function counter(name, nCount)
+-- 	for num in numbers(nCount) do
+-- 		print("num:  ", num)
+-- 		local eventName = name..tostring(num);
+-- 		signalOne(eventName)
+-- 		yield();
+-- 	end
+-- 	signalAll(name..'-finished')
+-- end
 
 function wait15() 
 	print("LAMDA"); 
-	waitForSignal("counter15") 
+	waitForSignal("waitingCounter15") 
 	print("reached 15!!") 
 end
 
 local function main()
-	local t1 = spawn(yieldCounter, "counter", 50)
-	local t2 = spawn(waitingOnCount, "counter", 20)
+	local t1 = spawn(yieldCounter, "yieldCounter", 50)
+	local t2 = spawn(waitingOnCount, "waitingCounter", 20)
 	local t3 = spawn(wait15)
 
 --	counter15
