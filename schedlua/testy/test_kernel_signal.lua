@@ -45,7 +45,8 @@ local function counter(name, nCount)
 		--local eventName = name..tostring(num);
 		local eventName = name..tostring(num);
 		--print(eventName)
-		yieldCount();
+		signalOne(eventName)
+		yield();
 	end
 
 	signalAll(name..'-finished')
