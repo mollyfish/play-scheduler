@@ -53,10 +53,10 @@ end
 -- 	signalAll(name..'-finished')
 -- end
 
-function wait15() 
+function wait35() 
 	print("LAMDA"); 
-	waitForSignal("waitingCounter15") 
-	print("reached 15!!") 
+	waitForSignal("yieldCounter35") 
+	print("reached 35!!") 
 end
 
 local function main()
