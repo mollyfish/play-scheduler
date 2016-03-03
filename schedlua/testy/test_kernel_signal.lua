@@ -31,11 +31,9 @@ end
 local function yieldCounter(name, nCount)
 	for num in numbers(nCount) do
 		print("num:  ", num)
+		local eventName = name..tostring(num);
+		signalOne(eventName)
 		if num < (nCount/2) then
-			--local eventName = name..tostring(num);
-			local eventName = name..tostring(num);
-			--print(eventName)
-			signalOne(eventName)
 			yield();
 		end
 		signalAll(name..'-finished')
@@ -44,11 +42,11 @@ local function yieldCounter(name, nCount)
 end
 
 local function counter(name, nCount)
+	
+
 	for num in numbers(nCount) do
 		print("num:  ", num)
-		--local eventName = name..tostring(num);
 		local eventName = name..tostring(num);
-		--print(eventName)
 		signalOne(eventName)
 		yield();
 	end
@@ -63,7 +61,7 @@ function wait15()
 end
 
 local function main()
-	local t1 = spawn(counter, "counter", 50)
+	local t1 = spawn(yieldCounter, "counter", 50)
 	local t2 = spawn(waitingOnCount, "counter", 20)
 	local t3 = spawn(wait15)
 
