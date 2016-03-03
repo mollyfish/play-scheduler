@@ -33,11 +33,12 @@ local function yieldCount(name)
 	local function closure()
 		idx = idx + 1;
 		if idx > 7 then
-			signalOne(name);
+			signalOne(name)
+			yield();
 		end
 		return idx;
 	end
-	yield();
+	--yield();
 end
 
 local function counter(name, nCount)
