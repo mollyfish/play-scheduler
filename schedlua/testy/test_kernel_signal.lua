@@ -54,7 +54,10 @@ end
 -- 	signalAll(name..'-finished')
 -- end
 
-function waitCutoff() 
+function waitCutoff()
+	local signalName = "yieldCounter"
+	signalName = "yieldCounter" .. cutoff
+	print(signalName); 
 	print("LAMDA"); 
 	waitForSignal("yieldCounter", cutoff) 
 	print("ALERT: reached ", cutoff) 
