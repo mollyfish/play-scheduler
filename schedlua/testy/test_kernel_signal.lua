@@ -56,7 +56,7 @@ end
 
 function waitCutoff() 
 	print("LAMDA"); 
-	waitForSignal("yieldCounter"..cutoff) 
+	waitForSignal("yieldCounter", cutoff) 
 	print("ALERT: reached ", cutoff) 
 end
 
