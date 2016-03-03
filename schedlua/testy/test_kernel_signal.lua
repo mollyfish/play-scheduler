@@ -29,7 +29,14 @@ local function onCountFinished(name)
 end
 
 local function yieldCount(name)
-	signalOne(name)
+	local idx = 0;
+	local function closure()
+		idx = idx + 1;
+		if idx > 7 then
+			signalOne(name);
+		end
+		return idx;
+	end
 	yield();
 end
 
