@@ -30,9 +30,9 @@ end
 
 local function yieldCount(name)
 	local idx = 0;
+	print("idx: ", idx)
 	local function closure()
 		idx = idx + 1;
-		print("idx: ", idx)
 		if idx > 7 then
 			signalOne(name)
 			yield();
