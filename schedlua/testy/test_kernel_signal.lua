@@ -3,6 +3,7 @@ package.path = package.path..";../?.lua"
 
 local Kernel = require("schedlua.kernel")()
 local Functor = require("schedlua.functor")
+local cutoff = 25; --arbitrary number for testing
 
 local function numbers(ending)
 	local idx = 0;
@@ -33,7 +34,7 @@ local function yieldCounter(name, nCount)
 		print("num:  ", num)
 		local eventName = name..tostring(num);
 		signalOne(eventName)
-		if num > (25) then
+		if num > (cutoff) then
 			--print("eventName: ", eventName)
 			signalOne(eventName)
 			yield();
@@ -53,16 +54,16 @@ end
 -- 	signalAll(name..'-finished')
 -- end
 
-function wait35() 
+function waitCutoff() 
 	print("LAMDA"); 
-	waitForSignal("yieldCounter35") 
-	print("reached 35!!") 
+	waitForSignal(yieldCounter..cutoff) 
+	print("ALERT: reached ", cutoff) 
 end
 
 local function main()
 	local t1 = spawn(yieldCounter, "yieldCounter", 50)
 	local t2 = spawn(waitingOnCount, "yieldCounter", 40)
-	local t3 = spawn(wait35)
+	local t3 = spawn(waitCutoff)
 
 --	counter15
 	-- test signalAll().  All three of these should trigger when
