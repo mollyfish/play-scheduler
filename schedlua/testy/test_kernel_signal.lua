@@ -28,19 +28,20 @@ local function onCountFinished(name)
 	print("Counter Finished: ", name)
 end
 
-local function yieldCount(name)
+local function yieldCount(name, nCount)
 	local idx = 0;
 	print("idx: ", idx)
-	local function closure()
+	local function closer()
 		idx = idx + 1;
-		if idx > 7 then
-			signalOne(name)
+		if idx > (nCount/2) then
+			signalOne(eventName)
 			yield();
+			return nil;
 		end
 		return idx;
 	end
-	return closure;
-	--yield();
+	
+	return closer;
 end
 
 local function counter(name, nCount)
@@ -49,7 +50,7 @@ local function counter(name, nCount)
 		--local eventName = name..tostring(num);
 		local eventName = name..tostring(num);
 		--print(eventName)
-		yieldCount(eventName);
+		yieldCount(eventName, num);
 	end
 
 	signalAll(name..'-finished')
