@@ -70,10 +70,10 @@ function Scheduler.scheduleTask(self, task, params)
 	end
 
 	task:setParams(params);
-	if priority == 0 do
+	if priority == 0 then
 		self.HiPri:enqueue(task);	
 	end
-	if priority == nil not exist do
+	if priority == nil not exist then
 		self.TasksReadyToRun:enqueue(task);
 	end
 	task.state = "readytorun"
