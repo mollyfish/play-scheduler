@@ -128,7 +128,7 @@ function Scheduler.GenericStep(self, queue)
 	end
 end
 
-function Scheduler.step(self)
+function Scheduler.step(sel)
 			self:GenericStep(HiPri)
 			self:GenericStep(TasksReadyToRun)
 	-- Now check the regular fibers
