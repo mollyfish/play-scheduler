@@ -125,6 +125,7 @@ function Scheduler.GenericStep(self, queue)
 	if task.state == "suspended" then
 		--print("suspended task wants to run")
 		return true;
+	end
 end
 
 function Scheduler.step(self, queue)
