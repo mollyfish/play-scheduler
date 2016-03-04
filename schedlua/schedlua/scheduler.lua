@@ -31,6 +31,7 @@ function Scheduler.init(self, ...)
 	--print("==== Scheduler.init ====")
 	local obj = {
 		TasksReadyToRun = Queue();
+		HiPri = Queue()
 	}
 	setmetatable(obj, Scheduler_mt)
 	
@@ -46,7 +47,7 @@ end
 --]]
 
 function Scheduler.tasksPending(self)
-	return self.TasksReadyToRun:length();
+	return self.TasksReadyToRun:length() + self.HiPri:length();
 end
 
 
@@ -69,7 +70,12 @@ function Scheduler.scheduleTask(self, task, params)
 	end
 
 	task:setParams(params);
-	self.TasksReadyToRun:enqueue(task);	
+	if priority == 0 do
+		self.HiPri:enqueue(task);	
+	end
+	if priority == nil not exist do
+		self.TasksReadyToRun:enqueue(task);
+	end
 	task.state = "readytorun"
 
 	return task;
@@ -94,9 +100,38 @@ function Scheduler.suspendCurrentFiber(self, ...)
 	self.CurrentFiber.state = "suspended"
 end
 
-function Scheduler.step(self)
+function Scheduler.GenericStep(self, queue)
+	-- body
 	-- Now check the regular fibers
-	local task = self.TasksReadyToRun:dequeue()
+	local task = self.queue:dequeue()
+
+	-- If no fiber in ready queue, then just return
+	if task == nil then
+		--print("Scheduler.step: NO TASK")
+		return true
+	end
+
+	if task:getStatus() == "dead" then
+		self:removeFiber(task)
+
+		return true;
+	end
+
+	-- If the task we pulled off the active list is 
+	-- not dead, then perhaps it is suspended.  If that's true
+	-- then it needs to drop out of the active list.
+	-- We assume that some other part of the system is responsible for
+	-- keeping track of the task, and rescheduling it when appropriate.
+	if task.state == "suspended" then
+		--print("suspended task wants to run")
+		return true;
+end
+
+function Scheduler.step(self, queue)
+			self:GenericStep(self.HiPri)
+			self:GenericStep(self.TasksReadyToRun)
+	-- Now check the regular fibers
+	local task = self.queue:dequeue()
 
 	-- If no fiber in ready queue, then just return
 	if task == nil then

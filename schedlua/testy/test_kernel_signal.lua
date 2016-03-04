@@ -35,10 +35,11 @@ local function yieldCounter(name, nCount)
 		print(num)
 		local eventName = name..tostring(num);
 		signalOne(eventName)
-		if num > (cutoff - 1) then
-			signalOne(eventName)
-			yield();
-		end
+		-- if num > (cutoff - 1) then
+		-- 	signalOne(eventName)
+		-- 	yield();
+		-- end
+		yield()
 	end
 	signalAll(name..'-finished')
 

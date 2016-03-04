@@ -35,6 +35,9 @@ function Task.create(self, aroutine, ...)
 	return self:init(aroutine, ...)
 end
 
+function Task.priority(num)
+	return 
+end
 
 function Task.getStatus(self)
 	return coroutine.status(self.routine);
