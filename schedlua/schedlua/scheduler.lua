@@ -101,9 +101,8 @@ function Scheduler.suspendCurrentFiber(self, ...)
 end
 
 function Scheduler.GenericStep(self, queue)
-	-- body
 	-- Now check the regular fibers
-	local task = self.queue:dequeue()
+	local task = queue:dequeue()
 
 	-- If no fiber in ready queue, then just return
 	if task == nil then
@@ -126,36 +125,6 @@ function Scheduler.GenericStep(self, queue)
 		--print("suspended task wants to run")
 		return true;
 	end
-end
-
-function Scheduler.step(self)
-			self:GenericStep(HiPri)
-			self:GenericStep(TasksReadyToRun)
-	-- Now check the regular fibers
-	local task = self.queue:dequeue()
-
-	-- If no fiber in ready queue, then just return
-	if task == nil then
-		--print("Scheduler.step: NO TASK")
-		return true
-	end
-
-	if task:getStatus() == "dead" then
-		self:removeFiber(task)
-
-		return true;
-	end
-
-	-- If the task we pulled off the active list is 
-	-- not dead, then perhaps it is suspended.  If that's true
-	-- then it needs to drop out of the active list.
-	-- We assume that some other part of the system is responsible for
-	-- keeping track of the task, and rescheduling it when appropriate.
-	if task.state == "suspended" then
-		--print("suspended task wants to run")
-		return true;
-	end
-
 	-- If we have gotten this far, then the task truly is ready to 
 	-- run, and it should be set as the currentFiber, and its coroutine
 	-- is resumed.
@@ -203,6 +172,11 @@ function Scheduler.step(self)
 	if task.state == "readytorun" then
 		self:scheduleTask(task, results);
 	end
+end
+
+function Scheduler.step(self)
+			self:GenericStep(self.HiPri)
+			self:GenericStep(self.TasksReadyToRun)
 end
 
 function Scheduler.yield(self, ...)
