@@ -8,8 +8,6 @@ local function numbers(ending)
 	local idx = 0;
 	local function closure()
 		idx = idx + 1;
-		print(idx)
-		print(ending)
 		if idx > ending then
 			return nil;
 		end
@@ -52,8 +50,8 @@ end
 
 local function main()
 	local t1 = spawn(counter, 0, "counter", 50)
-	local t2 = spawn(waitingOnCount, 0, "counter", 20)
-	local t3 = spawn(wait15, 0)
+	local t2 = spawn(waitingOnCount, 1, "counter", 20)
+	local t3 = spawn(wait15, 1)
 
 --	counter15
 	-- test signalAll().  All three of these should trigger when

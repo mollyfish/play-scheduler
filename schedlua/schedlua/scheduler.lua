@@ -73,7 +73,7 @@ function Scheduler.scheduleTask(self, task, params)
 	if priority == 0 then
 		self.HiPri:enqueue(task);	
 	end
-	if priority == nil then
+	if priority ~= 0 then
 		self.TasksReadyToRun:enqueue(task);
 	end
 	task.state = "readytorun"
