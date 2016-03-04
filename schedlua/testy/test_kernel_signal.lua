@@ -35,7 +35,6 @@ local function yieldCounter(name, nCount)
 		local eventName = name..tostring(num);
 		signalOne(eventName)
 		if num > (cutoff - 1) then
-			--print("eventName: ", eventName)
 			signalOne(eventName)
 			yield();
 		end
@@ -44,20 +43,9 @@ local function yieldCounter(name, nCount)
 
 end
 
--- local function counter(name, nCount)
--- 	for num in numbers(nCount) do
--- 		print("num:  ", num)
--- 		local eventName = name..tostring(num);
--- 		signalOne(eventName)
--- 		yield();
--- 	end
--- 	signalAll(name..'-finished')
--- end
-
 function waitCutoff()
 	local signalName = "yieldCounter"
 	signalName = "yieldCounter" .. (cutoff + 10)
-	--print(signalName); 
 	print("LAMDA"); 
 	waitForSignal(signalName) 
 	print("ALERT: reached ", (cutoff + 10)) 
@@ -68,16 +56,9 @@ local function main()
 	local t2 = spawn(waitingOnCount, "yieldCounter", 40)
 	local t3 = spawn(waitCutoff)
 
---	counter15
-	-- test signalAll().  All three of these should trigger when
-	-- counter finishes
 	local t13 = onSignal(Functor(onCountFinished, "yieldCounter-1"), "yieldCounter-finished")
 	local t14 = onSignal(Functor(onCountFinished, "yieldCounter-2"), "yieldCounter-finished")
 	local t15 = onSignal(Functor(onCountFinished, "yieldCounter-3"), "yieldCounter-finished")
---
 end
 
 run(main)
-
-
---print("After kernel run...")
