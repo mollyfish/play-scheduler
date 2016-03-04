@@ -1,4 +1,6 @@
 --test_scheduler.lua
+-- modified to let the first task run an arbitrary number of times
+-- before yielding.
 package.path = package.path..";../?.lua"
 
 local Kernel = require("schedlua.kernel")()
