@@ -100,7 +100,7 @@ function Scheduler.suspendCurrentFiber(self, ...)
 	self.CurrentFiber.state = "suspended"
 end
 
-function Scheduler.GenericStep(self, queue)
+function Scheduler.GenericStep(queue)
 	-- body
 	-- Now check the regular fibers
 	local task = self.queue:dequeue()
