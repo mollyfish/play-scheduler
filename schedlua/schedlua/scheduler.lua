@@ -129,8 +129,8 @@ function Scheduler.GenericStep(self, queue)
 end
 
 function Scheduler.step(self, queue)
-			self:GenericStep(self.HiPri)
-			self:GenericStep(self.TasksReadyToRun)
+			self:GenericStep(HiPri)
+			self:GenericStep(TasksReadyToRun)
 	-- Now check the regular fibers
 	local task = self.queue:dequeue()
 
