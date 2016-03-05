@@ -50,9 +50,8 @@ end
 
 local function main()
 	local t1 = spawn(counter, 1, "counter", 50)
-	local t2 = spawn(counter, 0, "counter", 20)
 	local t3 = spawn(waitingOnCount, 1, "counter", 25)
-	local t4 = spawn(wait15, 1)
+	local t4 = spawn(wait15, 0)
 
 --	counter15
 	-- test signalAll().  All three of these should trigger when
