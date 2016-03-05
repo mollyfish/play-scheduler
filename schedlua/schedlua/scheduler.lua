@@ -30,7 +30,7 @@ local Scheduler_mt = {
 function Scheduler.init(self, ...)
 	--print("==== Scheduler.init ====")
 	local obj = {
-		TasksReadyToRun = Queue();
+		LoPri = Queue();
 		HiPri = Queue()
 	}
 	setmetatable(obj, Scheduler_mt)
@@ -47,7 +47,7 @@ end
 --]]
 
 function Scheduler.tasksPending(self)
-	return self.TasksReadyToRun:length() + self.HiPri:length();
+	return self.LoPri:length() + self.HiPri:length();
 end
 
 
@@ -70,12 +70,15 @@ function Scheduler.scheduleTask(self, task, params)
 	end
 
 	task:setParams(params);
+
 	if priority == 0 then
 		self.HiPri:enqueue(task);	
 	end
+
 	if priority ~= 0 then
-		self.TasksReadyToRun:enqueue(task);
+		self.LoPri:enqueue(task);
 	end
+	
 	task.state = "readytorun"
 
 	return task;
@@ -176,7 +179,7 @@ end
 
 function Scheduler.step(self)
 			self:GenericStep(self.HiPri)
-			self:GenericStep(self.TasksReadyToRun)
+			self:GenericStep(self.LoPri)
 end
 
 function Scheduler.yield(self, ...)
