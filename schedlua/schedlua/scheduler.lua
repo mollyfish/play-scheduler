@@ -71,6 +71,8 @@ function Scheduler.scheduleTask(self, task, params)
 
 	task:setParams(params);
 
+	local priority = task.priority
+	
 	if priority == 0 then
 		self.HiPri:enqueue(task);	
 	end
